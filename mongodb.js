@@ -1,10 +1,18 @@
 // CRUD create read update delete
 
-const mongodb = require('mongodb')
-const MongoClient = mongodb.MongoClient
+// const mongodb = require('mongodb')
+// const MongoClient = mongodb.MongoClient
+// const ObjectID = mongodb.ObjectID
+
+const { MongoClient, ObjectID } = require('mongodb')
 
 const connectionURL = 'mongodb://127.0.0.1:27017'
 const databaseName = 'task-manager'
+
+const id = new ObjectID()
+console.log(id)
+console.log(id.id.length)
+console.log(id.toHexString().length)
 
 MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) => {
     if (error) {
@@ -14,8 +22,9 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) =>
     const db = client.db(databaseName)
 
     // db.collection('users').insertOne({
-    //     name: 'Shea',
-    //     age: 28
+    //     _id: id,
+    //     name: 'Hailey',
+    //     age: 29
     // }, (error, result) => {
     //     if (error) {
     //         return console.log('Unable to insert user')
@@ -40,33 +49,24 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) =>
     //     console.log(result.ops)
     // })
 
-    //
-    // Goal: Insert 3 tasks into a new tasks collection
-    //
-    // 1. Use insertMany to insert three documents
-    //      - description (string), completed (boolean)
-    // 2. Setup the callback to handle error or print ops
-    // 3. Run the script
-    // 4. Refresh the database in Robo 3T and view data in tasks collection
+    // db.collection('tasks').insertMany([
+    //     {
+    //         description: "Wake up",
+    //         completed: true
+    //     }, 
+    //     {
+    //         description: "Go to work",
+    //         completed: true
+    //     }, 
+    //     {
+    //         description: "Go home",
+    //         completed: false
+    //     }, 
+    // ], (error, result) => {
+    //     if (error) {
+    //         return console.log("Unable to insert documents")
+    //     }
 
-    db.collection('tasks').insertMany([
-        {
-            description: "Wake up",
-            completed: true
-        }, 
-        {
-            description: "Go to work",
-            completed: true
-        }, 
-        {
-            description: "Go home",
-            completed: false
-        }, 
-    ], (error, result) => {
-        if (error) {
-            return console.log("Unable to insert documents")
-        }
-
-        console.log(result.ops)
-    })
+    //     console.log(result.ops)
+    // })
 })
