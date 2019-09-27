@@ -9,11 +9,6 @@ const { MongoClient, ObjectID } = require('mongodb')
 const connectionURL = 'mongodb://127.0.0.1:27017'
 const databaseName = 'task-manager'
 
-const id = new ObjectID()
-console.log(id)
-console.log(id.id.length)
-console.log(id.toHexString().length)
-
 MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) => {
     if (error) {
         return console.log('Unable to connect to database!')
@@ -21,52 +16,40 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) =>
 
     const db = client.db(databaseName)
 
-    // db.collection('users').insertOne({
-    //     _id: id,
-    //     name: 'Hailey',
-    //     age: 29
-    // }, (error, result) => {
+    // db.collection('users').findOne({ _id: new ObjectID("5d8c92a7f60d4310f823f87b") }, (error, user) => {
     //     if (error) {
-    //         return console.log('Unable to insert user')
+    //         return console.log('Unable to fetch');
     //     }
 
-    //     console.log(result.ops)
+    //     console.log(user);
     // })
 
-    // db.collection('users').insertMany([
-    //     {
-    //         name: 'Jen',
-    //         age: 28
-    //     }, {
-    //         name: 'Gunther',
-    //         age: 27
-    //     }
-    // ], (error, result) => {
+    // db.collection('users').find({ age: 28 }).toArray((error, users) => {
     //     if (error) {
-    //         return console.log("Unable to insert documents")
+    //         return console.log('Unable to fetch');
     //     }
 
-    //     console.log(result.ops)
+    //     console.log(users);
     // })
 
-    // db.collection('tasks').insertMany([
-    //     {
-    //         description: "Wake up",
-    //         completed: true
-    //     }, 
-    //     {
-    //         description: "Go to work",
-    //         completed: true
-    //     }, 
-    //     {
-    //         description: "Go home",
-    //         completed: false
-    //     }, 
-    // ], (error, result) => {
-    //     if (error) {
-    //         return console.log("Unable to insert documents")
-    //     }
+    // Goal: Use find and findOne with tasks
+    //
+    // 1. use findOne to fetch the last task by it's id
+    // 2. Use fetch all tasks to get all tasks that are completed
 
-    //     console.log(result.ops)
-    // })
+    db.collection('tasks').findOne({ _id: new ObjectID("5d834b14639659376ba25d14") }, (error, task) => {
+        if (error) {
+            return console.log('Unable to fetch');
+        }
+
+        console.log(task);
+    })
+
+    db.collection('tasks').find({ completed: true }).toArray((error, tasks) => {
+        if (error) {
+            return console.log('Unable to fetch');
+        }
+
+        console.log(tasks);
+    })
 })
