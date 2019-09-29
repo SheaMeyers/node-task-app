@@ -32,11 +32,6 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) =>
     //     console.log(users);
     // })
 
-    // Goal: Use find and findOne with tasks
-    //
-    // 1. use findOne to fetch the last task by it's id
-    // 2. Use fetch all tasks to get all tasks that are completed
-
     db.collection('tasks').findOne({ _id: new ObjectID("5d834b14639659376ba25d14") }, (error, task) => {
         if (error) {
             return console.log('Unable to fetch');
