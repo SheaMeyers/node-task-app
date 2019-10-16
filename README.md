@@ -2,8 +2,9 @@
 
 Starting MongoDB, run 
 ```bash
-/Users/shea-personal/mongodb/bin/mongod --dbpath=/Users/shea-personal/mongodb-data/
+mongod --dbpath=/Users/shea-personal/mongodb-data/
 ```
+from ~ directory
 
 Starting server, run
 ```bash
